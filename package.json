@@ -1,0 +1,45 @@
+{
+    "name": "create-express-app",
+    "version": "0.0.1",
+    "description": "Create you ExpressJs applications easily",
+    "main": "src/index.ts",
+    "scripts": {
+        "start": "node dist/src/index.js",
+        "build": "swc src --out-dir dist",
+        "dev": "pnpm build && pnpm start",
+        "lint": "npx eslint src/**/*.ts",
+        "lint:fix": "npm run lint -- --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kriptonian1/create-express-app.git"
+    },
+    "keywords": [
+        "express"
+    ],
+    "author": "Sawan Bhattacharya <sawan.bhattacharya442@gmail.com> (https://twitter.com/kriptonian8)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/kriptonian1/create-express-app/issues"
+    },
+    "homepage": "https://github.com/kriptonian1/create-express-app#readme",
+    "devDependencies": {
+        "@swc/cli": "^0.3.10",
+        "@swc/core": "^1.4.2",
+        "@types/adm-zip": "^0.5.5",
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.11.21",
+        "@typescript-eslint/eslint-plugin": "^7.1.0",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-config-standard-with-typescript": "^43.0.1",
+        "eslint-plugin-import": "^2.29.1",
+        "eslint-plugin-n": "^16.6.2",
+        "eslint-plugin-promise": "^6.1.1",
+        "typescript": "^5.3.3"
+    },
+    "dependencies": {
+        "adm-zip": "^0.5.10",
+        "axios": "^1.6.7"
+    }
+}
