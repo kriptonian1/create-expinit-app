@@ -16,10 +16,8 @@ import downloadRepo from "@/utils/downloadRepo";
 
     zip.getEntries().forEach((entry) => {
         if (entry.entryName.startsWith(targetFolder)) {
-            // console.log(entry.entryName);
             const segments = entry.entryName.split("/");
             const newEntryName = segments.slice(2).join("/"); // Adjust the number based on your needs
-            console.log(newEntryName);
             zip.extractEntryTo(
                 entry.entryName,
                 `./temp`, // specify the destination directory here
