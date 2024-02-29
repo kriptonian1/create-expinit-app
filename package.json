@@ -2,13 +2,17 @@
     "name": "create-express-app",
     "version": "0.0.1",
     "description": "Create you ExpressJs applications easily",
-    "main": "src/index.ts",
+    "main": "dist/src/index.js",
+    "bin": {
+        "create-express-app": "dist/src/index.js"
+    },
     "scripts": {
         "start": "node dist/src/index.js",
         "build": "swc src --out-dir dist",
         "dev": "pnpm build && pnpm start",
         "lint": "npx eslint src/**/*.ts",
-        "lint:fix": "npm run lint -- --fix"
+        "lint:fix": "npm run lint -- --fix",
+        "prepublish": "swc src --out-dir dist"
     },
     "repository": {
         "type": "git",
