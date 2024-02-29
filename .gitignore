@@ -23,6 +23,7 @@ build
 destination
 /temp
 dist
+repoTemplate.zip
 
 # OS X
 .DS_Store*
