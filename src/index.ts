@@ -1,42 +1,33 @@
 #!/usr/bin/env node
 
-import AdmZip from "adm-zip";
-import path from "path";
+import { intro, note, outro, spinner, text } from "@clack/prompts";
+import color from "picocolors";
+
 import downloadRepo from "@/utils/downloadRepo";
+import generateFile from "@/utils/generateFile";
 
-(async () => {
-    console.log("hello");
+void (async () => {
+    console.log();
+    const s = spinner();
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    intro(color.inverse(" create-express-app "));
+
+    let name: string | symbol = "myExpressApp";
+
+    name = await text({
+        message: "What would you like to you project ?",
+        placeholder: "myExpressApp",
+    }) as string;
+
+    s.start("Downloading the template...");
     await downloadRepo();
+    generateFile(name.toString());
+    s.stop();
 
-    const zip = new AdmZip(`${path.resolve(process.cwd())}/repoTemplate.zip`);
+    const nextSteps = `cd ${name}        \nnpm install\nnpm dev`;
 
-    const targetFolder =
-        "create-express-app-templates-main/create-express-app-template-ts/";
+	note(nextSteps, 'Next steps.');
 
-    zip.getEntries().forEach((entry) => {
-        if (entry.entryName.startsWith(targetFolder)) {
-            const segments = entry.entryName.split("/");
-            const newEntryName = segments.slice(2).join("/"); // Adjust the number based on your needs
-            zip.extractEntryTo(
-                entry.entryName,
-                `./temp`, // specify the destination directory here
-                false, // maintain the folder structure
-                true, // overwrite files if they already exist
-                false, // The file will be set as the permission from the entry if this is true
-                `./destination/${newEntryName}`
-            );
-        }
-    });
-
-    // zip.extractEntryTo(
-    //     "create-express-app-templates-main/create-express-app-template-ts/",
-    //     "./destination", // specify the destination directory here
-    //     true, // maintain the folder structure
-    //     true // overwrite files if they already exist
-    // );
-    // renameSync(
-    //     `${path.resolve(process.cwd())}/create-express-app-template-ts`, // old path
-    //     "myNewApp" // new path
-    // );
+    outro(`Problems? ${color.underline(color.cyan('https://github.com/kriptonian1/create-express-app/issues'))}`);
 })();
